@@ -44,9 +44,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-ul {
-  border: 1px solid black;
-}
+
 
 
 
