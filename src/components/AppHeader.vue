@@ -7,15 +7,20 @@ export default {
 
      }
   }
+  
 }
 
 </script>
 
 <template>
- <h1>header</h1>
+  <div>
+  <label for="search">search movie</label>
+  <input type="text" name="movie-name" id="movie-name">
+  <button>search</button>
+ </div>
 </template>
 
 <style lang="scss" scoped>
-@use '../styles/general.scss'
+
 
 </style>
