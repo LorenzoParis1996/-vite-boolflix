@@ -8,6 +8,9 @@ export default {
      return {
         movies: [{
 
+        }],
+        series:[{
+
         }]
      }
   },
@@ -24,10 +27,28 @@ export default {
     },
     searchMovie(searchInput) {
       this.getMovies(searchInput);
+    },
+    getSeries (seriesName) {
+      axios.get('https://api.themoviedb.org/3/search/tv?api_key=38b525462acbdcf4ec457c833e004566&query=' + seriesName)
+      .then((response) => {
+        this.series = response.data.results;
+        console.log(this.series);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+    },
+    searchSeries(searchInput) {
+      this.getSeries(searchInput);
+    },
+    searchBoth(searchInput) {
+      this.getMovies(searchInput);
+      this.getSeries(searchInput);
     }
   },
   created() {
     this.getMovies();
+    this.getSeries();
   },
   components: {
     HeaderSearchBar
@@ -38,7 +59,7 @@ export default {
 </script>
 
 <template>
-  <HeaderSearchBar @searchedMovie="searchMovie"/>
+  <HeaderSearchBar @searched="searchBoth"/>
  <h1>main</h1>
  <div>
   <ul v-for="movie in movies" :key="movie.id">
@@ -47,13 +68,22 @@ export default {
     <li>{{ movie.original_language }}</li>
     <li>{{ movie.vote_average }}</li>
   </ul>
+  <ul v-for="serie in series" :key="serie.id">
+    <li>{{ serie.name }}</li>
+    <li>{{ serie.original_name }}</li>
+    <li>{{ serie.original_language }}</li>
+    <li>{{ serie.vote_average }}</li>
+
+  </ul>
  </div>
  
 </template>
 
 <style lang="scss" scoped>
 
-
+ul {
+  padding: 1rem;
+}
 
 
 </style>

@@ -14,7 +14,7 @@ export default {
   <div>
   <label for="search">search movie</label>
   <input type="text" name="movie-name" id="movie-name" v-model="searchInput">
-  <button @click="$emit('searchedMovie', searchInput)">search</button>
+  <button @click="$emit('searched', searchInput)">search</button>
  </div>
 </template>
 
