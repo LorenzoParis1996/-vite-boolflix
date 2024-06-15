@@ -13,11 +13,7 @@ export default {
 </script>
 
 <template>
-  <div>
-  <label for="search">search movie</label>
-  <input type="text" name="movie-name" id="movie-name">
-  <button>search</button>
- </div>
+<h1>header</h1>
 </template>
 
 <style lang="scss" scoped>
