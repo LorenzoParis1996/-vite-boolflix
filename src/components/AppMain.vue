@@ -65,13 +65,13 @@ export default {
   <ul v-for="movie in movies" :key="movie.id">
     <li>{{ movie.title }}</li>
     <li>{{ movie.original_title }}</li>
-    <li>{{ movie.original_language }}</li>
+    <li class="lang-icon" :class="`lang-icon-${movie.original_language}`"></li>
     <li>{{ movie.vote_average }}</li>
   </ul>
   <ul v-for="serie in series" :key="serie.id">
     <li>{{ serie.name }}</li>
     <li>{{ serie.original_name }}</li>
-    <li>{{ serie.original_language }}</li>
+    <li class="lang-icon" :class="`lang-icon-${serie.original_language}`"></li>
     <li>{{ serie.vote_average }}</li>
 
   </ul>
@@ -80,10 +80,15 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+@use '../styles/partials/flags' as *;
 
 ul {
   padding: 1rem;
+  list-style: none;
 }
 
+.lang-icon {
+  background-image: url(../../node_modules/@textabledev/langs-flags-list/lang-flags.png);
+}
 
 </style>
