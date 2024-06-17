@@ -63,12 +63,18 @@ export default {
  <h1>main</h1>
  <div>
   <ul v-for="movie in movies" :key="movie.id">
+    <li>
+      <img :src="`https://image.tmdb.org/t/p/w154${movie.poster_path}`" :alt="`${movie.title}`">
+    </li>
     <li>{{ movie.title }}</li>
     <li>{{ movie.original_title }}</li>
     <li class="lang-icon" :class="`lang-icon-${movie.original_language}`"></li>
     <li>{{ movie.vote_average }}</li>
   </ul>
   <ul v-for="serie in series" :key="serie.id">
+    <li>
+      <img :src="`https://image.tmdb.org/t/p/w154${serie.poster_path}`" :alt="`${serie.title}`">
+    </li>
     <li>{{ serie.name }}</li>
     <li>{{ serie.original_name }}</li>
     <li class="lang-icon" :class="`lang-icon-${serie.original_language}`"></li>
