@@ -62,6 +62,7 @@ export default {
   <HeaderSearchBar @searched="searchBoth"/>
  <h1>main</h1>
  <div>
+  <h1>Movies</h1>
   <ul v-for="movie in movies" :key="movie.id">
     <li>
       <img :src="`https://image.tmdb.org/t/p/w154${movie.poster_path}`" :alt="`${movie.title}`">
@@ -69,8 +70,9 @@ export default {
     <li>{{ movie.title }}</li>
     <li>{{ movie.original_title }}</li>
     <li class="lang-icon" :class="`lang-icon-${movie.original_language}`"></li>
-    <li>{{ movie.vote_average }}</li>
+    <li>{{ parseInt(Math.round(movie.vote_average) / 2) }}</li>
   </ul>
+  <h1>Series</h1>
   <ul v-for="serie in series" :key="serie.id">
     <li>
       <img :src="`https://image.tmdb.org/t/p/w154${serie.poster_path}`" :alt="`${serie.title}`">
@@ -78,7 +80,7 @@ export default {
     <li>{{ serie.name }}</li>
     <li>{{ serie.original_name }}</li>
     <li class="lang-icon" :class="`lang-icon-${serie.original_language}`"></li>
-    <li>{{ serie.vote_average }}</li>
+    <li>{{ parseInt(Math.round(serie.vote_average) / 2) }}</li>
 
   </ul>
  </div>
