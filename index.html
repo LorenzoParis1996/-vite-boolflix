@@ -20,3 +20,33 @@
 </body>
 
 </html>
+
+
+
+<!--
+
+------------------------------------------------------------------------
+<ul v-for="movie in movies" :key="movie.id">
+  <li>
+    <img  :src="`https://image.tmdb.org/t/p/w342${movie.poster_path}`" :alt="`${movie.title}`">
+  </li>
+  <li>Title: {{ movie.title }}</li>
+  <li>Original title: {{ movie.original_title }}</li>
+  <li>Language: <i  class="lang-icon" :class="`lang-icon-${movie.original_language}`" ></i></li>
+  <li>Vote: <i v-for="star in parseInt(Math.round(movie.vote_average) / 2)"  class="fa-solid fa-star" style="color: #ffd43b;"></i>
+  <i v-for="star in (5 - parseInt(Math.round(movie.vote_average) / 2))" class="fa-regular fa-star"></i></li>
+</ul>
+------------------------------------------------------------------------
+<ul v-for="serie in series" :key="serie.id">
+  <li class="img-container">
+    <img :src="`https://image.tmdb.org/t/p/w342${serie.poster_path}`" :alt="`${serie.title}`">
+  </li>
+  <li>{{ serie.name }}</li>
+  <li>{{ serie.original_name }}</li>
+  <li class="lang-icon" :class="`lang-icon-${serie.original_language}`"></li>
+  <li><i v-for="star in parseInt(Math.round(serie.vote_average) / 2)"  class="fa-solid fa-star" style="color: #ffd43b;"></i>
+  <i v-for="star in (5 - parseInt(Math.round(serie.vote_average) / 2))" class="fa-regular fa-star"></i></li>
+
+</ul>
+
+-->
