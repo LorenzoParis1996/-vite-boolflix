@@ -70,7 +70,8 @@ export default {
     <li>{{ movie.title }}</li>
     <li>{{ movie.original_title }}</li>
     <li class="lang-icon" :class="`lang-icon-${movie.original_language}`"></li>
-    <li>{{ parseInt(Math.round(movie.vote_average) / 2) }}</li>
+    <li><i v-for="star in parseInt(Math.round(movie.vote_average) / 2)"  class="fa-solid fa-star" style="color: #ffd43b;"></i>
+    <i v-for="star in (5 - parseInt(Math.round(movie.vote_average) / 2))" class="fa-regular fa-star"></i></li>
   </ul>
   <h1>Series</h1>
   <ul v-for="serie in series" :key="serie.id">
@@ -80,7 +81,8 @@ export default {
     <li>{{ serie.name }}</li>
     <li>{{ serie.original_name }}</li>
     <li class="lang-icon" :class="`lang-icon-${serie.original_language}`"></li>
-    <li>{{ parseInt(Math.round(serie.vote_average) / 2) }}</li>
+    <li><i v-for="star in parseInt(Math.round(serie.vote_average) / 2)"  class="fa-solid fa-star" style="color: #ffd43b;"></i>
+    <i v-for="star in (5 - parseInt(Math.round(serie.vote_average) / 2))" class="fa-regular fa-star"></i></li>
 
   </ul>
  </div>
