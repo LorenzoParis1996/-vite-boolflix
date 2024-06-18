@@ -71,25 +71,35 @@ export default {
    <section class="wrapper">
    
    <article v-for="movie in movies" :key="movie.id">
+     
      <img class="no-poster" v-if="movie.poster_path == null" src="https://www.psdmockups.com/wp-content/uploads/2019/10/Movie-Poster-Advertising-PSD-Mockup.jpg" alt="poster not available">
      <img v-else :src="`https://image.tmdb.org/t/p/w342${movie.poster_path}`" :alt="`${movie.title}`">
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
+     
+     <div class="overview">
+    <p><strong>Type Media: </strong>Movie</p>
+    <p><strong>Title: </strong>{{ movie.title }}</p>
+    <p><strong>Original title: </strong>{{ movie.original_title }}</p>
+    <p><strong>Language: </strong><i  class="lang-icon" :class="`lang-icon-${movie.original_language}`" ></i></p>
+    <p><strong>Vote: </strong><i v-for="star in parseInt(Math.round(movie.vote_average) / 2)"  class="fa-solid fa-star" style="color: #ffd43b;"></i>
+      <i v-for="star in (5 - parseInt(Math.round(movie.vote_average) / 2))" class="fa-regular fa-star"></i></p>
+    <p><strong>Overview: </strong>{{ movie.overview }}</p>
+     </div>
    </article>
 
 
    <article v-for="serie in series" :key="serie.id">
+     
      <img class="no-poster" v-if="serie.poster_path == null" src="https://www.psdmockups.com/wp-content/uploads/2019/10/Movie-Poster-Advertising-PSD-Mockup.jpg" alt="poster not available">
      <img v-else :src="`https://image.tmdb.org/t/p/w342${serie.poster_path}`" :alt="`${serie.title}`">
+     
     <div class="overview">
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
+    <p><strong>Type Media:</strong> TV Serie</p> 
+    <p><strong>Title: </strong>{{ serie.name }}</p>
+    <p><strong>Original title: </strong>{{ serie.original_name }}</p>
+    <p><strong>Vote: </strong><i  class="lang-icon" :class="`lang-icon-${serie.original_language}`"></i></p>
+    <p><strong>Vote: </strong><i v-for="star in parseInt(Math.round(serie.vote_average) / 2)"  class="fa-solid fa-star" style="color: #ffd43b;"></i>
+      <i v-for="star in (5 - parseInt(Math.round(serie.vote_average) / 2))" class="fa-regular fa-star"></i></p>
+    <p><strong>Overview: </strong>{{ serie.overview }}</p>
     </div>
    </article>
   
@@ -130,25 +140,49 @@ ul {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    gap: 1rem;
     padding: 5rem;
     
    
     article {
       width: calc(100% / 6);
-      padding: 1rem;
+      position: relative;
+      
+      
 
 
       img {
         width: 100%;
         aspect-ratio: 1/1.5;
+        vertical-align: bottom;
         
       }
 
       .no-poster {
         width: 100%;
-        height: 99%;
-        
+        height: 99%;       
       }
+
+      .overview {
+        visibility: hidden;
+        color: white;
+        font-size: 13px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        padding: 1rem;
+        background-color: black; 
+        border: 2px solid white;
+        opacity: 0.9;
+      }
+
+   
+    }
+
+    article:hover .overview {
+      visibility: visible;
     }
     
   }
