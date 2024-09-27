@@ -7,38 +7,38 @@ import AppHeader from './AppHeader.vue';
 
 export default {
   data() {
-     return {
-        movies: [{
+    return {
+      movies: [{
 
-        }],
-        series:[{
+      }],
+      series: [{
 
-        }]
-     }
+      }]
+    }
   },
   methods: {
-    getMovies (movieName) {
-       axios.get('https://api.themoviedb.org/3/search/movie?api_key=38b525462acbdcf4ec457c833e004566&query=' + movieName)
-       .then((response) => {
-         this.movies= response.data.results;
-         console.log(this.movies);
-       })
-       .catch(function (error) {
-                    console.log(error);
-       })
+    getMovies(movieName) {
+      axios.get('https://api.themoviedb.org/3/search/movie?api_key=38b525462acbdcf4ec457c833e004566&query=' + movieName)
+        .then((response) => {
+          this.movies = response.data.results;
+          console.log(this.movies);
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
     },
     searchMovie(searchInput) {
       this.getMovies(searchInput);
     },
-    getSeries (seriesName) {
+    getSeries(seriesName) {
       axios.get('https://api.themoviedb.org/3/search/tv?api_key=38b525462acbdcf4ec457c833e004566&query=' + seriesName)
-      .then((response) => {
-        this.series = response.data.results;
-        console.log(this.series);
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
+        .then((response) => {
+          this.series = response.data.results;
+          console.log(this.series);
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
     },
     searchSeries(searchInput) {
       this.getSeries(searchInput);
@@ -56,66 +56,74 @@ export default {
     HeaderSearchBar,
     AppHeader
   }
-  
+
 }
 
 </script>
 
 <template>
   <section class="header">
-  <AppHeader/>
-  <HeaderSearchBar @searched="searchBoth"/>
+    <AppHeader />
+    <HeaderSearchBar @searched="searchBoth" />
   </section>
- 
- <div class="main">
-   <section class="wrapper">
-   
-   <article v-for="movie in movies" :key="movie.id">
-     
-     <img class="no-poster" v-if="movie.poster_path == null" src="https://www.psdmockups.com/wp-content/uploads/2019/10/Movie-Poster-Advertising-PSD-Mockup.jpg" alt="poster not available">
-     <img v-else :src="`https://image.tmdb.org/t/p/w342${movie.poster_path}`" :alt="`${movie.title}`">
-     
-     <div class="overview">
-    <p><strong>Type Media: </strong>Movie</p>
-    <p><strong>Title: </strong>{{ movie.title }}</p>
-    <p><strong>Original title: </strong>{{ movie.original_title }}</p>
-    <p><strong>Language: </strong><i  class="lang-icon" :class="`lang-icon-${movie.original_language}`" ></i></p>
-    <p><strong>Vote: </strong><i v-for="star in parseInt(Math.round(movie.vote_average) / 2)"  class="fa-solid fa-star" style="color: #ffd43b;"></i>
-      <i v-for="star in (5 - parseInt(Math.round(movie.vote_average) / 2))" class="fa-regular fa-star"></i></p>
-    <p><strong>Overview: </strong>{{ movie.overview }}</p>
-     </div>
-   </article>
+
+  <div class="main">
+    <section class="wrapper">
+
+      <article v-for="movie in movies" :key="movie.id">
+
+        <img class="no-poster" v-if="movie.poster_path == null"
+          src="https://www.shutterstock.com/image-illustration/red-wall-words-coming-soon-260nw-2285307157.jpg"
+          alt="poster not available">
+        <img v-else :src="`https://image.tmdb.org/t/p/w342${movie.poster_path}`" :alt="`${movie.title}`">
+
+        <div class="overview">
+          <p><strong>Type Media: </strong>Movie</p>
+          <p><strong>Title: </strong>{{ movie.title }}</p>
+          <p><strong>Original title: </strong>{{ movie.original_title }}</p>
+          <p><strong>Language: </strong><i class="lang-icon" :class="`lang-icon-${movie.original_language}`"></i></p>
+          <p><strong>Vote: </strong><i v-for="star in parseInt(Math.round(movie.vote_average) / 2)"
+              class="fa-solid fa-star" style="color: #ffd43b;"></i>
+            <i v-for="star in (5 - parseInt(Math.round(movie.vote_average) / 2))" class="fa-regular fa-star"></i>
+          </p>
+          <p><strong>Overview: </strong>{{ movie.overview }}</p>
+        </div>
+      </article>
 
 
-   <article v-for="serie in series" :key="serie.id">
-     
-     <img class="no-poster" v-if="serie.poster_path == null" src="https://www.psdmockups.com/wp-content/uploads/2019/10/Movie-Poster-Advertising-PSD-Mockup.jpg" alt="poster not available">
-     <img v-else :src="`https://image.tmdb.org/t/p/w342${serie.poster_path}`" :alt="`${serie.title}`">
-     
-    <div class="overview">
-    <p><strong>Type Media:</strong> TV Serie</p> 
-    <p><strong>Title: </strong>{{ serie.name }}</p>
-    <p><strong>Original title: </strong>{{ serie.original_name }}</p>
-    <p><strong>Vote: </strong><i  class="lang-icon" :class="`lang-icon-${serie.original_language}`"></i></p>
-    <p><strong>Vote: </strong><i v-for="star in parseInt(Math.round(serie.vote_average) / 2)"  class="fa-solid fa-star" style="color: #ffd43b;"></i>
-      <i v-for="star in (5 - parseInt(Math.round(serie.vote_average) / 2))" class="fa-regular fa-star"></i></p>
-    <p><strong>Overview: </strong>{{ serie.overview }}</p>
-    </div>
-   </article>
-  
-   
- 
+      <article v-for="serie in series" :key="serie.id">
 
-  </section>
- </div>
- 
+        <img class="no-poster" v-if="serie.poster_path == null"
+          src="https://www.psdmockups.com/wp-content/uploads/2019/10/Movie-Poster-Advertising-PSD-Mockup.jpg"
+          alt="poster not available">
+        <img v-else :src="`https://image.tmdb.org/t/p/w342${serie.poster_path}`" :alt="`${serie.title}`">
+
+        <div class="overview">
+          <p><strong>Type Media:</strong> TV Serie</p>
+          <p><strong>Title: </strong>{{ serie.name }}</p>
+          <p><strong>Original title: </strong>{{ serie.original_name }}</p>
+          <p><strong>Vote: </strong><i class="lang-icon" :class="`lang-icon-${serie.original_language}`"></i></p>
+          <p><strong>Vote: </strong><i v-for="star in parseInt(Math.round(serie.vote_average) / 2)"
+              class="fa-solid fa-star" style="color: #ffd43b;"></i>
+            <i v-for="star in (5 - parseInt(Math.round(serie.vote_average) / 2))" class="fa-regular fa-star"></i>
+          </p>
+          <p><strong>Overview: </strong>{{ serie.overview }}</p>
+        </div>
+      </article>
+
+
+
+
+    </section>
+  </div>
+
 </template>
 
 <style lang="scss" scoped>
 @use '../styles/partials/flags' as *;
 
 ul {
-  
+
   list-style: none;
 }
 
@@ -133,8 +141,8 @@ ul {
 
 .main {
   background-color: rgb(67, 67, 67);
-  
-  
+
+
 
   .wrapper {
     display: flex;
@@ -142,25 +150,25 @@ ul {
     flex-wrap: wrap;
     gap: 1rem;
     padding: 5rem;
-    
-   
+
+
     article {
       width: calc(100% / 6);
       position: relative;
-      
-      
+
+
 
 
       img {
         width: 100%;
         aspect-ratio: 1/1.5;
         vertical-align: bottom;
-        
+
       }
 
       .no-poster {
         width: 100%;
-        height: 99%;       
+        height: 99%;
       }
 
       .overview {
@@ -173,19 +181,18 @@ ul {
         left: 0;
         bottom: 0;
         padding: 1rem;
-        background-color: black; 
+        background-color: black;
         border: 2px solid white;
         opacity: 0.9;
       }
 
-   
+
     }
 
     article:hover .overview {
       visibility: visible;
     }
-    
+
   }
 }
-
 </style>
