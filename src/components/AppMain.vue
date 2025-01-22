@@ -13,7 +13,8 @@ export default {
       }],
       series: [{
 
-      }]
+      }],
+      hasSearched: false
     }
   },
   methods: {
@@ -21,6 +22,7 @@ export default {
       axios.get('https://api.themoviedb.org/3/search/movie?api_key=38b525462acbdcf4ec457c833e004566&query=' + movieName)
         .then((response) => {
           this.movies = response.data.results;
+          this.hasSearched = true;
           console.log(this.movies);
         })
         .catch(function (error) {
@@ -34,6 +36,7 @@ export default {
       axios.get('https://api.themoviedb.org/3/search/tv?api_key=38b525462acbdcf4ec457c833e004566&query=' + seriesName)
         .then((response) => {
           this.series = response.data.results;
+          this.hasSearched = true;
           console.log(this.series);
         })
         .catch(function (error) {
@@ -49,8 +52,8 @@ export default {
     }
   },
   created() {
-    this.getMovies();
-    this.getSeries();
+    //this.getMovies();
+    //this.getSeries();
   },
   components: {
     HeaderSearchBar,
@@ -70,7 +73,11 @@ export default {
   <div class="main">
     <section class="wrapper">
 
-      <article v-for="movie in movies" :key="movie.id">
+      <div v-if="!hasSearched" class="search-message">
+        <h1>Start searching</h1>
+      </div>
+
+      <article v-for="movie in movies" :key="movie.id" v-if="hasSearched">
 
         <img class="no-poster" v-if="movie.poster_path == null"
           src="https://www.shutterstock.com/image-illustration/red-wall-words-coming-soon-260nw-2285307157.jpg"
@@ -86,12 +93,12 @@ export default {
               class="fa-solid fa-star" style="color: #ffd43b;"></i>
             <i v-for="star in (5 - parseInt(Math.round(movie.vote_average) / 2))" class="fa-regular fa-star"></i>
           </p>
-          <p><strong>Overview: </strong>{{ movie.overview }}</p>
+          <p><strong>Overview: </strong>{{ movie.overview ? movie.overview : "No info available" }}</p>
         </div>
       </article>
 
 
-      <article v-for="serie in series" :key="serie.id">
+      <article v-for="serie in series" :key="serie.id" v-if="hasSearched">
 
         <img class="no-poster" v-if="serie.poster_path == null"
           src="https://www.psdmockups.com/wp-content/uploads/2019/10/Movie-Poster-Advertising-PSD-Mockup.jpg"
@@ -107,7 +114,7 @@ export default {
               class="fa-solid fa-star" style="color: #ffd43b;"></i>
             <i v-for="star in (5 - parseInt(Math.round(serie.vote_average) / 2))" class="fa-regular fa-star"></i>
           </p>
-          <p><strong>Overview: </strong>{{ serie.overview }}</p>
+          <p><strong>Overview: </strong>{{ serie.overview ? serie.overview : "No info available" }}</p>
         </div>
       </article>
 
@@ -141,6 +148,9 @@ ul {
 
 .main {
   background-color: rgb(67, 67, 67);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 
 
 
@@ -150,6 +160,16 @@ ul {
     flex-wrap: wrap;
     gap: 1rem;
     padding: 5rem;
+    flex-grow: 1;
+
+
+    .search-message {
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 3rem;
+    }
 
 
     article {
@@ -168,7 +188,7 @@ ul {
 
       .no-poster {
         width: 100%;
-        height: 99%;
+        height: auto;
       }
 
       .overview {
@@ -184,6 +204,7 @@ ul {
         background-color: black;
         border: 2px solid white;
         opacity: 0.9;
+        overflow-y: auto;
       }
 
 

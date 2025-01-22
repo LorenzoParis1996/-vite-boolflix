@@ -1,26 +1,28 @@
 <script>
 export default {
-  data() {
-     return {
-        searchInput: ''
-     }
-  }
- 
-  
+   data() {
+      return {
+         searchInput: ''
+      }
+   }
+
+
 }
 </script>
 
 <template>
-  <div>
-  <label for="search">Start searching</label>
-  <input type="text" name="movie-name" id="movie-name" v-model="searchInput" @keyup.enter="$emit('searched', searchInput)">
-  <button @click="$emit('searched', searchInput)"><i class="fa-solid fa-magnifying-glass"></i></button>
- </div>
+   <div>
+      <label for="search">Search</label>
+      <input type="text" name="movie-name" id="movie-name" v-model="searchInput"
+         @keyup.enter="$emit('searched', searchInput)">
+      <button @click="$emit('searched', searchInput)"><i class="fa-solid fa-magnifying-glass"></i></button>
+   </div>
 </template>
 
 <style lang="scss" scoped>
-
-label,input, button {
+label,
+input,
+button {
    margin: 0 0.5rem;
 }
 
@@ -35,7 +37,7 @@ button {
    background-color: black;
    color: white;
    border: none;
-   border-radius: 5px; 
+   border-radius: 5px;
    font-size: 20px;
    padding: 0.5rem;
 
@@ -44,5 +46,4 @@ button {
       background-color: white;
    }
 }
-
 </style>
